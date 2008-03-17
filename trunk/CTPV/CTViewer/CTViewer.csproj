@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>2d120ac6-eddf-4af6-89da-cea3e337d30d</ProjectGuid>
+    <ProjectGuid>{0C3ED1ED-782A-4F07-9918-54C4A075C5C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CTViewer</RootNamespace>
@@ -36,18 +36,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Model\Data\CTFile.cs" />
+    <Compile Include="Model\Data\Patient.cs" />
+    <Compile Include="Model\Enumeration\ByteOrder.cs" />
+    <Compile Include="Model\Enumeration\DataType.cs" />
+    <Compile Include="Model\Enumeration\MedicalOrientation.cs" />
+    <Compile Include="Model\Image\CTImage.cs" />
+    <Compile Include="Model\Image\CTImageException.cs" />
+    <Compile Include="Model\IO\CTReader.cs" />
+    <Compile Include="Model\IO\CTReaderException.cs" />
+    <Compile Include="Model\IO\CTWriter.cs" />
+    <Compile Include="Model\IO\CTWriterException.cs" />
+    <Compile Include="Presenter\MainPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainView.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -62,6 +72,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="View\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\FileView\" />
+    <Folder Include="View\MDIView\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
