@@ -4,7 +4,10 @@ using System.Text;
 
 namespace CTViewer.Model.Enumeration
 {
-    class MedicalOrientation
+    public enum MedicalOrientation
     {
+        Transversal,
+        Frontal,
+        Sagittal
     }
 }

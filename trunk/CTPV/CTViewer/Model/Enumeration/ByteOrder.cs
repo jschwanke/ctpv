@@ -4,7 +4,9 @@ using System.Text;
 
 namespace CTViewer.Model.Enumeration
 {
-    class ByteOrder
+    public enum ByteOrder
     {
+        LSB,
+        MSB
     }
 }

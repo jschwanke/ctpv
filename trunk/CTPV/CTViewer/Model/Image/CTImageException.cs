@@ -4,7 +4,23 @@ using System.Text;
 
 namespace CTViewer.Model.Image
 {
-    class CTImageException
+    public class CTImageException : ApplicationException
     {
+        public CTImageException()
+        {
+            //Nothing
+        }
+
+        public CTImageException(string message)
+            : base(message)
+        {
+            //Nothing
+        }
+
+        public CTImageException(string message, Exception inner)
+            : base(message, inner)
+        {
+            //Nothing
+        }
     }
 }
