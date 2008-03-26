@@ -1,0 +1,4 @@
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\InterfaceLayer\bin\Debug\InterfaceLayer.dll
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\InterfaceLayer\bin\Debug\InterfaceLayer.pdb
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\InterfaceLayer\obj\Debug\InterfaceLayer.dll
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\InterfaceLayer\obj\Debug\InterfaceLayer.pdb

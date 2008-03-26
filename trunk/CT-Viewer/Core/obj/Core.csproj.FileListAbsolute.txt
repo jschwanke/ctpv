@@ -1,0 +1,7 @@
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Core\bin\Debug\Core.dll
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Core\bin\Debug\Core.pdb
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Core\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Core\obj\Debug\Core.dll
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Core\obj\Debug\Core.pdb
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Core\bin\Debug\InterfaceLayer.dll
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Core\bin\Debug\InterfaceLayer.pdb

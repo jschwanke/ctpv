@@ -1,0 +1,16 @@
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\bin\Debug\Viewer.exe
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\bin\Debug\Viewer.pdb
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\bin\Debug\Core.dll
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\bin\Debug\InterfaceLayer.dll
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\bin\Debug\InterfaceLayer.pdb
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\bin\Debug\Core.pdb
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.Properties.Resources.resources
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.csproj.GenerateResource.Cache
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.exe
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.pdb
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.View.View.resources
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\bin\Debug\Viewer.exe.config
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.View.MDI.MDIControl.resources
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.View.MDI.ImageControl.resources
+C:\Users\Jens Schwanke\Documents\Studium\Studienarbeit\CT-Viewer\Viewer\obj\Debug\Viewer.View.MDI.GWControl.resources
