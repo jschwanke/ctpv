@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Viewer.Controller;
-using Viewer.Core.Enumeration;
+using Viewer.Core;
 
 namespace Viewer.View.MDI
 {
@@ -57,35 +57,35 @@ namespace Viewer.View.MDI
             get { return gw.GWCenter; }
         }
 
-        public int GetScrollPosition(ImageOrientation orientation)
+        public int GetScrollPosition(ImageCube.EImageOrientation orientation)
         {
             int position = 0;
             switch (orientation)
             {
-                case ImageOrientation.Transversal:
+                case ImageCube.EImageOrientation.Transversal:
                     position = transversal.ScrollPosition;
                     break;
-                case ImageOrientation.Sagittal:
+                case ImageCube.EImageOrientation.Sagittal:
                     position = sagittal.ScrollPosition;
                     break;
-                case ImageOrientation.Frontal:
+                case ImageCube.EImageOrientation.Frontal:
                     position = frontal.ScrollPosition;
                     break;
             }
             return position;
         }
 
-        public void UpdateImage(ImageOrientation orientation, Image image)
+        public void UpdateImage(ImageCube.EImageOrientation orientation, Image image)
         {
             switch (orientation)
             {
-                case ImageOrientation.Transversal:
+                case ImageCube.EImageOrientation.Transversal:
                     transversal.Image = image;
                     break;
-                case ImageOrientation.Sagittal:
+                case ImageCube.EImageOrientation.Sagittal:
                     sagittal.Image = image;
                     break;
-                case ImageOrientation.Frontal:
+                case ImageCube.EImageOrientation.Frontal:
                     frontal.Image = image;
                     break;
             }
@@ -96,17 +96,17 @@ namespace Viewer.View.MDI
             presenter.UpdateImages(this);
         }
 
-        public void DrawLine(ImageOrientation orientation, Line line1, Line line2)
+        public void DrawLine(ImageCube.EImageOrientation orientation, Line line1, Line line2)
         {
             switch (orientation)
             {
-                case ImageOrientation.Transversal:
+                case ImageCube.EImageOrientation.Transversal:
                     transversal.DrawLine(line1, line2);
                     break;
-                case ImageOrientation.Sagittal:
+                case ImageCube.EImageOrientation.Sagittal:
                     sagittal.DrawLine(line1, line2);
                     break;
-                case ImageOrientation.Frontal:
+                case ImageCube.EImageOrientation.Frontal:
                     frontal.DrawLine(line1, line2);
                     break;
             }
