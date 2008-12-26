@@ -35,25 +35,10 @@ namespace Viewer.Core
         public ByteOrder ByteOrder { get; set; }
 
         /// <summary>
-        /// Liefert oder setzt den Datentyp der gespeicherten Voxelwerte Short oder Float.
-        /// </summary>
-        public DataType DataType { get; set; }
-
-        /// <summary>
         /// Liefert oder setzt die Orientierung des Bildes: transversal, sagittal, frontal.
         /// </summary>
         public ImageOrientation ImageOrientation { get; set; }
         
-        /// <summary>
-        /// Liefert oder setzt den Kommentar, der bei der Erzeugung eingegeben wurde.
-        /// </summary>
-        public string CreationInfo { get; set; }
-
-        /// <summary>
-        /// Liefert oder setzt den Namen des Geraets, mit dem die Bilder 
-        /// erzeugt wurden.
-        /// </summary>
-        public string CreatedBy { get; set; }
 
         /// <summary>
         /// Liefert oder setzt die Groesse eines Voxels in der Datei in Bytes.
@@ -122,7 +107,7 @@ namespace Viewer.Core
         /// <summary>
         /// Liefert oder setzt die Modalität z.B. CT, MR, PET ...
         /// </summary>
-        public string Modality { get; set; }
+        //public string Modality { get; set; }
 
         /// <summary>
         ///  Liefert oder setzt die Pixelgroesse in mm.
@@ -179,7 +164,7 @@ namespace Viewer.Core
         /// Bei der Übergabe eines fehlerhaften Wertes wird eine ImageCubeException
         /// ausgelöst.
         /// </exception>
-        public float[, ,] FloatCubeData { get; set; }
+        //public float[, ,] FloatCubeData { get; set; }
 
         /// <summary>
         /// Liefert den unteren Rand (in mm) der Bildinformation in einer sagittalen 
@@ -228,31 +213,6 @@ namespace Viewer.Core
         }
 
         /// <summary>
-        /// Prueft die Verfuegbarkeit der Pixeldaten. Liefert true, wenn die 
-        /// Pixel(Voxel)daten verfuegbar sind, sonst false.
-        /// </summary>
-        /// <returns>True, wenn die Pixel(Voxel)daten verfuegbar sind, sonst false</returns>
-        public bool IsPixelDataAvailable()
-        {
-            bool result = false;
-            if (DataType == DataType.Short)
-            {
-                if (ShortCubeData != null)
-                {
-                    result = true;
-                }
-            }
-            else if (DataType == DataType.Float)
-            {
-                if (FloatCubeData != null)
-                {
-                    result = true;
-                }
-            }
-            return result;
-        }
-
-        /// <summary>
         /// Berechnet aus den gespeicherten Daten Bilder entsprechend der 
         /// uebergebenen Orientierung. Methode geht davon aus, dass die Bilder in 
         /// transversaler Orientierung ohne Gantry-Verkippung akquiriert und
@@ -275,86 +235,83 @@ namespace Viewer.Core
 		    float bottomLine = GetBottomLineInMM();
 		    float topLine = GetTopLineInMM();
 
-		    if (IsPixelDataAvailable())
-		    {
-		        zIndex = DimZ - 1;
-		        switch (orientation)
-		        {
-		            case ImageOrientation.Transversal:
-		                if (sliceIndex >= 0 && sliceIndex < DimZ)
-		                {
-		                    result = new short[DimY, DimX];
-		                    for (int y = 0; y < DimY; y++)
-		                    {
-		                        for (int x = 0; x < DimX; x++)
-		                        {
-		                            result[y, x] = ShortCubeData[x,y,sliceIndex];
-		                        }
-		                    }
-		                }
-		                break;
+	        zIndex = DimZ - 1;
+	        switch (orientation)
+	        {
+	            case ImageOrientation.Transversal:
+	                if (sliceIndex >= 0 && sliceIndex < DimZ)
+	                {
+	                    result = new short[DimY, DimX];
+	                    for (int y = 0; y < DimY; y++)
+	                    {
+	                        for (int x = 0; x < DimX; x++)
+	                        {
+	                            result[y, x] = ShortCubeData[x,y,sliceIndex];
+	                        }
+	                    }
+	                }
+	                break;
 
-		            case ImageOrientation.Frontal:
-		                if (sliceIndex >= 0 && sliceIndex < Dimension)
-		                {
-		                    result = new short[Dimension, Dimension];
-		                    curPos = DimZ * SliceDistance;
-		                    for (i = 0; i < Dimension; i++)
-		                    {
-		                        curPixel = (Dimension - i) * PixelSize;
-		                        if ((curPixel >= topLine) && (curPixel <= bottomLine))
-		                        {
-		                            if (curPos < zIndex*SliceDistance)
-		                            {
-		                                zIndex--;
-		                            }
+	            case ImageOrientation.Frontal:
+	                if (sliceIndex >= 0 && sliceIndex < Dimension)
+	                {
+	                    result = new short[Dimension, Dimension];
+	                    curPos = DimZ * SliceDistance;
+	                    for (i = 0; i < Dimension; i++)
+	                    {
+	                        curPixel = (Dimension - i) * PixelSize;
+	                        if ((curPixel >= topLine) && (curPixel <= bottomLine))
+	                        {
+	                            if (curPos < zIndex*SliceDistance)
+	                            {
+	                                zIndex--;
+	                            }
 
-		                            if ((zIndex >= 0) && (zIndex < DimZ)
-		                                && (sliceIndex >= OffsetY)
-		                                && (sliceIndex < (OffsetY + DimY)))
-		                            {
-		                                for (int x = 0; x < DimX; x++)
-		                                {
-		                                    result[i, x] = ShortCubeData[x, sliceIndex, zIndex];
-		                                }
-		                            }
-		                            curPos = curPos - PixelSize;
-		                        }
-		                    }
-		                }
-		                break;
+	                            if ((zIndex >= 0) && (zIndex < DimZ)
+	                                && (sliceIndex >= OffsetY)
+	                                && (sliceIndex < (OffsetY + DimY)))
+	                            {
+	                                for (int x = 0; x < DimX; x++)
+	                                {
+	                                    result[i, x] = ShortCubeData[x, sliceIndex, zIndex];
+	                                }
+	                            }
+	                            curPos = curPos - PixelSize;
+	                        }
+	                    }
+	                }
+	                break;
 
-		            case ImageOrientation.Sagittal:
-		                result = new short[Dimension, Dimension];
-		                if (sliceIndex >= 0 && sliceIndex < Dimension)
-		                {
-		                    curPos = DimZ * SliceDistance;
-		                    for (i = 0; i < Dimension; i++)
-		                    {
-		                        curPixel = (Dimension - i) * PixelSize;
-		                        if ((curPixel >= topLine) && (curPixel <= bottomLine))
-		                        {
-		                            if (curPos < zIndex * SliceDistance)
-		                            {
-		                                zIndex--;
-		                            }
-                                
-		                            if ((zIndex >= 0) && (zIndex < DimZ)
-		                                && (sliceIndex >= OffsetY)
-		                                && (sliceIndex < (OffsetY + DimY)))
-		                            {
-		                                for (j = 0; j < Dimension; j++)
-		                                {
-		                                    result[i, j] = ShortCubeData[sliceIndex, j, zIndex];
-		                                }
-		                            }
-		                            curPos = curPos - PixelSize;
-		                        }
-		                    }
-		                }
-		                break;
-		        }
-		    }
+	            case ImageOrientation.Sagittal:
+	                result = new short[Dimension, Dimension];
+	                if (sliceIndex >= 0 && sliceIndex < Dimension)
+	                {
+	                    curPos = DimZ * SliceDistance;
+	                    for (i = 0; i < Dimension; i++)
+	                    {
+	                        curPixel = (Dimension - i) * PixelSize;
+	                        if ((curPixel >= topLine) && (curPixel <= bottomLine))
+	                        {
+	                            if (curPos < zIndex * SliceDistance)
+	                            {
+	                                zIndex--;
+	                            }
+                            
+	                            if ((zIndex >= 0) && (zIndex < DimZ)
+	                                && (sliceIndex >= OffsetY)
+	                                && (sliceIndex < (OffsetY + DimY)))
+	                            {
+	                                for (j = 0; j < Dimension; j++)
+	                                {
+	                                    result[i, j] = ShortCubeData[sliceIndex, j, zIndex];
+	                                }
+	                            }
+	                            curPos = curPos - PixelSize;
+	                        }
+	                    }
+	                }
+	                break;
+	        }
             return result;
         }
 
