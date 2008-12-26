@@ -40,57 +40,28 @@ namespace Viewer.Core
             BinaryReader binaryReader = new BinaryReader(fileStream);
             try
             {
-                if(imageCube.DataType == DataType.Short)
+                short[,,] shortData = new short[imageCube.DimX, imageCube.DimY, imageCube.DimZ];
+                byte[] byteData = new byte[imageCube.DataSize];
+
+                for (int z = 0; z < imageCube.DimZ; z++)
                 {
-                    short[,,] shortData = new short[imageCube.DimX, imageCube.DimY, imageCube.DimZ];
-                    byte[] byteData = new byte[imageCube.DataSize];
-
-                    for (int z = 0; z < imageCube.DimZ; z++)
+                    for (int y = 0; y < imageCube.DimY; y++)
                     {
-                        for (int y = 0; y < imageCube.DimY; y++)
+                        for (int x = 0; x < imageCube.DimX; x++)
                         {
-                            for (int x = 0; x < imageCube.DimX; x++)
+                            for (int i = 0; i < imageCube.DataSize; i++ )
                             {
-                                for (int i = 0; i < imageCube.DataSize; i++ )
-                                {
-                                    byteData[i] = binaryReader.ReadByte();
-                                }
-
-                                if(imageCube.ByteOrder == ByteOrder.MSB)
-                                {
-                                    Array.Reverse(byteData);
-                                }
-                                shortData[x,y,z] = BitConverter.ToInt16(byteData, 0);
+                                byteData[i] = binaryReader.ReadByte();
                             }
+
+                            if(imageCube.ByteOrder == ByteOrder.MSB)
+                            {
+                                Array.Reverse(byteData);
+                            }
+                            shortData[x,y,z] = BitConverter.ToInt16(byteData, 0);
                         }
                     }
                     imageCube.ShortCubeData = shortData;
-                }
-                else
-                {
-                    float[,,] floatData = new float[imageCube.DimX, imageCube.DimY, imageCube.DimZ];
-                    byte[] byteData = new byte[imageCube.DataSize];
-
-                    for (int z = 0; z < imageCube.DimZ; z++)
-                    {
-                        for (int y = 0; y < imageCube.DimY; y++)
-                        {
-                            for (int x = 0; x < imageCube.DimX; x++)
-                            {
-                                for (int i = 0; i < imageCube.DataSize; i++)
-                                {
-                                    byteData[i] = binaryReader.ReadByte();
-                                }
-
-                                if (imageCube.ByteOrder == ByteOrder.MSB)
-                                {
-                                    Array.Reverse(byteData);
-                                }
-                                floatData[z, y, x] = BitConverter.ToSingle(byteData, 0);
-                            }
-                        }
-                    }
-                    imageCube.FloatCubeData = floatData;
                 }
             }
             catch (IOException e)
@@ -110,56 +81,21 @@ namespace Viewer.Core
             string value = input.Substring(input.IndexOf(" ")).Trim();
             input = input.ToLower();
 
-            if (input.StartsWith("modality"))
+            if (input.StartsWith("primary_view"))
             {
-                imageCube.Modality = value;
-            }
-            else if (input.StartsWith("created_by"))
-            {
-                imageCube.CreatedBy = value;
-            }
-            else if (input.StartsWith("creation_info"))
-            {
-                imageCube.CreationInfo = value;
-            }
-            else if (input.StartsWith("primary_view"))
-            {
-                value = value.ToLower();
-                if (value == "transversal")
+                switch (value.ToLower())
                 {
-                    imageCube.ImageOrientation = ImageOrientation.Transversal;
-                }
-                else if (value == "sagittal")
-                {
-                    imageCube.ImageOrientation = ImageOrientation.Sagittal;
-                }
-                else if (value == "frontal")
-                {
-                    imageCube.ImageOrientation = ImageOrientation.Frontal;
-                }
-                else
-                {
-                    throw new ReaderException("Error occurred by reading primary_view.");
-                }
-            }
-            else if (input.StartsWith("data_type"))
-            {
-                value = value.ToLower();
-                if (value == "integer")
-                {
-                    imageCube.DataType = DataType.Short;
-                }
-                else if (value == "float")
-                {
-                    imageCube.DataType = DataType.Float;
-                }
-                else if (value == "vaxfloat")
-                {
-                    imageCube.DataType = DataType.Float;
-                }
-                else
-                {
-                    throw new ReaderException("Error occurred by reading data_type.");
+                    case "transversal":
+                        imageCube.ImageOrientation = ImageOrientation.Transversal;
+                        break;
+                    case "sagittal":
+                        imageCube.ImageOrientation = ImageOrientation.Sagittal;
+                        break;
+                    case "frontal":
+                        imageCube.ImageOrientation = ImageOrientation.Frontal;
+                        break;
+                    default:
+                        throw new ReaderException("Error occurred by reading primary_view.");
                 }
             }
             else if (input.StartsWith("num_bytes"))
@@ -176,34 +112,28 @@ namespace Viewer.Core
             }
             else if (input.StartsWith("byte_order"))
             {
-                value = value.ToLower();
-                if (value == "vms")
+                switch (value.ToLower())
                 {
-                    imageCube.ByteOrder = ByteOrder.MSB;
-                }
-                else if (value == "aix")
-                {
-                    imageCube.ByteOrder = ByteOrder.MSB;
-                }
-                else if (value == "ultrix")
-                {
-                    imageCube.ByteOrder = ByteOrder.LSB;
-                }
-                else if (value == "decunix")
-                {
-                    imageCube.ByteOrder = ByteOrder.LSB;
-                }
-                else if (value == "linux")
-                {
-                    imageCube.ByteOrder = ByteOrder.LSB;
-                }
-                else if (value == "msdos")
-                {
-                    imageCube.ByteOrder = ByteOrder.LSB;
-                }
-                else
-                {
-                    throw new ReaderException("Error occurred by reading byte_order.");
+                    case "vms":
+                        imageCube.ByteOrder = ByteOrder.MSB;
+                        break;
+                    case "aix":
+                        imageCube.ByteOrder = ByteOrder.MSB;
+                        break;
+                    case "ultrix":
+                        imageCube.ByteOrder = ByteOrder.LSB;
+                        break;
+                    case "decunix":
+                        imageCube.ByteOrder = ByteOrder.LSB;
+                        break;
+                    case "linux":
+                        imageCube.ByteOrder = ByteOrder.LSB;
+                        break;
+                    case "msdos":
+                        imageCube.ByteOrder = ByteOrder.LSB;
+                        break;
+                    default:
+                        throw new ReaderException("Error occurred by reading byte_order.");
                 }
             }
             else if (input.StartsWith("slice_dimension"))
