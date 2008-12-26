@@ -1,34 +1,23 @@
 using System.Drawing;
 
-namespace Viewer.Presenter
+namespace Viewer.Controller
 {
     public class Line
     {
-        private Point start;
-        private Point end;
-
         public Line(Point start, Point end)
         {
-            this.start = start;
-            this.end = end;
+            Start = start;
+            End = end;
         }
 
         public Line(int x1, int y1, int x2, int y2)
         {
-            this.start = new Point(x1,y1);
-            this.end = new Point(x2, y2);
+            Start = new Point(x1,y1);
+            End = new Point(x2, y2);
         }
 
-        public Point Start
-        {
-            get { return start; }
-            set { start = value; }
-        }
+        public Point Start { get; set; }
 
-        public Point End
-        {
-            get { return end; }
-            set { end = value; }
-        }
+        public Point End { get; set; }
     }
 }

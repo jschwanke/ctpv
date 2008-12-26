@@ -2,54 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Viewer.Presenter
+namespace Viewer.Controller
 {
     public class Position
     {
-        private int lastWidth;
-        private int lastCenter;
-        private int lastTransversal;
-        private int lastSagittal;
-        private int lastFrontal;
-
-
         public Position(int lastWidth, int lastCenter, int lastTransversal, int lastSagittal, int lastFrontal)
         {
-            this.lastWidth = lastWidth;
-            this.lastCenter = lastCenter;
-            this.lastTransversal = lastTransversal;
-            this.lastSagittal = lastSagittal;
-            this.lastFrontal = lastFrontal;
+            LastWidth = lastWidth;
+            LastCenter = lastCenter;
+            LastTransversal = lastTransversal;
+            LastSagittal = lastSagittal;
+            LastFrontal = lastFrontal;
         }
 
-        public int LastTransversal
-        {
-            get { return lastTransversal; }
-            set { lastTransversal = value; }
-        }
+        public int LastTransversal { get; set; }
 
-        public int LastSagittal
-        {
-            get { return lastSagittal; }
-            set { lastSagittal = value; }
-        }
+        public int LastSagittal { get; set; }
 
-        public int LastFrontal
-        {
-            get { return lastFrontal; }
-            set { lastFrontal = value; }
-        }
+        public int LastFrontal { get; set; }
 
-        public int LastWidth
-        {
-            get { return lastWidth; }
-            set { lastWidth = value; }
-        }
+        public int LastWidth { get; set; }
 
-        public int LastCenter
-        {
-            get { return lastCenter; }
-            set { lastCenter = value; }
-        }
+        public int LastCenter { get; set; }
     }
 }

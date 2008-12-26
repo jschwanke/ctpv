@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Viewer.Presenter
+namespace Viewer.Controller
 {
     public unsafe static class Helper
     {
