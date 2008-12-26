@@ -9,9 +9,9 @@ namespace Viewer.View
     public partial class View : Form
     {
         private readonly ListBox listBox;
-        private readonly Presenter.Presenter presenter;
+        private readonly Controller.Presenter presenter;
 
-        public View(Presenter.Presenter presenter)
+        public View(Controller.Presenter presenter)
         {
             this.presenter = presenter;
             InitializeComponent();

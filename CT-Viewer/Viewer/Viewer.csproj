@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4D20CAB1-F709-480A-9C8F-F4AB5198342F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -40,10 +40,18 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Presenter\Helper.cs" />
-    <Compile Include="Presenter\Line.cs" />
-    <Compile Include="Presenter\Position.cs" />
-    <Compile Include="Presenter\Presenter.cs" />
+    <Compile Include="Controller\Helper.cs" />
+    <Compile Include="Controller\Line.cs" />
+    <Compile Include="Controller\Position.cs" />
+    <Compile Include="Controller\Presenter.cs" />
+    <Compile Include="Core\CTXReader.cs" />
+    <Compile Include="Core\CubeManager.cs" />
+    <Compile Include="Core\Enumeration\ByteOrder.cs" />
+    <Compile Include="Core\Enumeration\DataType.cs" />
+    <Compile Include="Core\Enumeration\ImageOrientation.cs" />
+    <Compile Include="Core\ImageCube.cs" />
+    <Compile Include="Core\ImageCubeException.cs" />
+    <Compile Include="Core\ReaderException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -106,16 +114,6 @@
     <Compile Include="View\View.Designer.cs">
       <DependentUpon>View.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{E62160CB-401C-4D9D-9CC7-52DA7114FCAB}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InterfaceLayer\InterfaceLayer.csproj">
-      <Project>{7CD6C425-E8A3-4653-8438-DFD6FB2D3532}</Project>
-      <Name>InterfaceLayer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
