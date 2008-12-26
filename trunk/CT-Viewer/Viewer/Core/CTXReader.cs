@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using System.IO;
-using Viewer.Core.Enumeration;
 
 namespace Viewer.Core
 {
@@ -36,8 +35,7 @@ namespace Viewer.Core
         }
         private static void ReadCtxFile(ImageCube imageCube, string ctxFile)
         {
-            FileStream fileStream = new FileStream(ctxFile, FileMode.Open);
-            BinaryReader binaryReader = new BinaryReader(fileStream);
+            BinaryReader binaryReader = new BinaryReader(new FileStream(ctxFile, FileMode.Open));
             try
             {
                 short[,,] shortData = new short[imageCube.DimX, imageCube.DimY, imageCube.DimZ];
@@ -54,7 +52,7 @@ namespace Viewer.Core
                                 byteData[i] = binaryReader.ReadByte();
                             }
 
-                            if(imageCube.ByteOrder == ByteOrder.MSB)
+                            if(imageCube.ByteOrder == ImageCube.EByteOrder.MSB)
                             {
                                 Array.Reverse(byteData);
                             }
@@ -70,7 +68,6 @@ namespace Viewer.Core
             }
             finally
             {
-                fileStream.Close();
                 binaryReader.Close();
             }
         }
@@ -86,13 +83,13 @@ namespace Viewer.Core
                 switch (value.ToLower())
                 {
                     case "transversal":
-                        imageCube.ImageOrientation = ImageOrientation.Transversal;
+                        imageCube.ImageOrientation = ImageCube.EImageOrientation.Transversal;
                         break;
                     case "sagittal":
-                        imageCube.ImageOrientation = ImageOrientation.Sagittal;
+                        imageCube.ImageOrientation = ImageCube.EImageOrientation.Sagittal;
                         break;
                     case "frontal":
-                        imageCube.ImageOrientation = ImageOrientation.Frontal;
+                        imageCube.ImageOrientation = ImageCube.EImageOrientation.Frontal;
                         break;
                     default:
                         throw new ReaderException("Error occurred by reading primary_view.");
@@ -115,22 +112,22 @@ namespace Viewer.Core
                 switch (value.ToLower())
                 {
                     case "vms":
-                        imageCube.ByteOrder = ByteOrder.MSB;
+                        imageCube.ByteOrder = ImageCube.EByteOrder.MSB;
                         break;
                     case "aix":
-                        imageCube.ByteOrder = ByteOrder.MSB;
+                        imageCube.ByteOrder = ImageCube.EByteOrder.MSB;
                         break;
                     case "ultrix":
-                        imageCube.ByteOrder = ByteOrder.LSB;
+                        imageCube.ByteOrder = ImageCube.EByteOrder.LSB;
                         break;
                     case "decunix":
-                        imageCube.ByteOrder = ByteOrder.LSB;
+                        imageCube.ByteOrder = ImageCube.EByteOrder.LSB;
                         break;
                     case "linux":
-                        imageCube.ByteOrder = ByteOrder.LSB;
+                        imageCube.ByteOrder = ImageCube.EByteOrder.LSB;
                         break;
                     case "msdos":
-                        imageCube.ByteOrder = ByteOrder.LSB;
+                        imageCube.ByteOrder = ImageCube.EByteOrder.LSB;
                         break;
                     default:
                         throw new ReaderException("Error occurred by reading byte_order.");

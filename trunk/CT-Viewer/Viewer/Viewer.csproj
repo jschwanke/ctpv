@@ -46,9 +46,6 @@
     <Compile Include="Controller\Presenter.cs" />
     <Compile Include="Core\CTXReader.cs" />
     <Compile Include="Core\CubeManager.cs" />
-    <Compile Include="Core\Enumeration\ByteOrder.cs" />
-    <Compile Include="Core\Enumeration\DataType.cs" />
-    <Compile Include="Core\Enumeration\ImageOrientation.cs" />
     <Compile Include="Core\ImageCube.cs" />
     <Compile Include="Core\ImageCubeException.cs" />
     <Compile Include="Core\ReaderException.cs" />
