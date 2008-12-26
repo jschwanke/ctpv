@@ -1,5 +1,5 @@
 
-namespace InterfaceLayer.Enumeration
+namespace Viewer.Core.Enumeration
 {
     /// <summary>
     /// Enumeration, die die ByteOrder definiert unter welcher
