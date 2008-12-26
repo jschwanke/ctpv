@@ -10,7 +10,7 @@ namespace Viewer
         [STAThread]
         static void Main()
         {
-            new Presenter.Presenter();
+            new Controller.Presenter();
         }
     }
 }

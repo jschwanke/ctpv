@@ -1,8 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using InterfaceLayer.Enumeration;
-using Viewer.Presenter;
+using Viewer.Controller;
 
 namespace Viewer.View.MDI
 {
@@ -11,11 +10,10 @@ namespace Viewer.View.MDI
         private Graphics pictureGraphic;
         private Image saveImage;
 
-        public ImageControl(ImageOrientation orientation, Image image, 
-            int scrollMax, EventHandler scrollHandler)
+        public ImageControl(Image image, int scrollMax, EventHandler scrollHandler)
         {
             InitializeComponent();
-            this.trackBar.Scroll += scrollHandler;
+            trackBar.Scroll += scrollHandler;
             Image = image;
             trackBar.Minimum = 0;
             trackBar.Maximum = scrollMax-1;
