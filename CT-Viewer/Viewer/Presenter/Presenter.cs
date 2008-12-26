@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Core;
-using InterfaceLayer.Enumeration;
-using InterfaceLayer.Image;
+using Viewer.Core;
+using Viewer.Core.Enumeration;
 using Viewer.Properties;
 using Viewer.View.MDI;
 
-namespace Viewer.Presenter
+namespace Viewer.Controller
 {
     public class Presenter
     {
@@ -27,12 +26,6 @@ namespace Viewer.Presenter
             Application.Run(view = new View.View(this));
         }
 
-        /// <summary>
-        /// Erzeugt neue IImageCube Objekte aus den übergebenen Dateinamen.
-        /// </summary>
-        /// <param name="filenames">
-        /// Die Dateinamen, welche die Daten der IImageCube Objekte enthalten.
-        /// </param>
         public void CreateImageCubes(string[] filenames)
         {
             foreach (string filename in filenames)
@@ -41,12 +34,6 @@ namespace Viewer.Presenter
             }
         }
 
-        /// <summary>
-        /// Erzeugt ein neues IImageCube Objekt aus dem übergebenen Dateinamen.
-        /// </summary>
-        /// <param name="filename">
-        /// Der Dateiname, welcher die Daten des IImageCube Objekts enthält.
-        /// </param>
         public void CreateImageCube(string filename)
         {
             string hedFile = "";
@@ -64,12 +51,8 @@ namespace Viewer.Presenter
                     ctxFile = filename;
                     hedFile = filename.Replace(".ctx", ".hed");
                 }
-                else
-                {
-                    //Error
-                }
 
-                IImageCube imageCube = manager.CreateImageCube(hedFile, ctxFile);
+                ImageCube imageCube = manager.CreateImageCube(hedFile, ctxFile);
                 Settings settings = new Settings();
                 int width = settings.gw_width;
                 int center = settings.gw_center;
@@ -117,49 +100,24 @@ namespace Viewer.Presenter
             }
         }
 
-        /// <summary>
-        /// Erzeugt neue IImageCube Objekte aus dem übergebenen Verzeichnisspfad.
-        /// </summary> 
-        /// <param name="directoryPath">
-        /// In dem Verzeichnisspfad befinden sich die Dateinen um IImageCube Objekte
-        /// zu erzeugen.
-        /// </param>
         public void CreateImageCubesFromDirectory(string directoryPath)
         {
             DirectoryInfo directory = new DirectoryInfo(directoryPath);
-            if(directory.Exists)
+            if (!directory.Exists) return;
+            foreach (FileInfo file in directory.GetFiles("*.hed"))
             {
-                foreach (FileInfo file in directory.GetFiles("*.hed"))
-                {
-                    CreateImageCube(file.FullName);
-                }
-            }
-            else
-            {
-                
+                CreateImageCube(file.FullName);
             }
         }
 
-        /// <summary>
-        /// Beendet das Programm.
-        /// </summary>
         public void CloseApplication()
         {
-            manager.Dispose();
-            view.Dispose();
             Application.Exit();
         }
 
-        /// <summary>
-        /// Aktualisiert die Images des IMDIControls, wenn beispielweise
-        /// eine andere Schicht ausgewählt wurde. 
-        /// </summary>
-        /// <param name="mdiControl">
-        /// Das IMDIControl welches eine Aktualisierung ihrer ImageCubes verlagt.
-        /// </param>
         public void UpdateImages(MDIControl mdiControl)
         {
-            IImageCube imageCube = manager.GetImageCube(mdiControl.ImageID);
+            ImageCube imageCube = manager.GetImageCube(mdiControl.ImageID);
             Position position = lastPosition[imageCube.ImageID]; 
 
             int width = mdiControl.GWWidth;
@@ -241,24 +199,11 @@ namespace Viewer.Presenter
             mdiControl.DrawLine(ImageOrientation.Frontal, line1, line2);
         }
 
-        /// <summary>
-        /// Entfernt denIImageCube aus dem Speicher.
-        /// </summary>
-        /// <param name="imageID">Das aus dem Speicher zu entfernende IMDIControl.</param>
         public void CloseMDIControl(Guid imageID)
         {
             manager.RemoveImageCube(imageID);
         }
 
-        /// <summary>
-        /// Gibt die IImageCube ID, des ImageCube zurück welche aus den Daten
-        /// der Datei, der mit filename übergeben wurde, erzeugt wurde.
-        /// </summary>
-        /// <param name="filename">Die zum IImageCube passende Datei.</param>
-        /// <returns>
-        /// IImageCube ID zu der dazugehörigen Datei, welche mit filename
-        /// übergeben wurde oder Guid.Empty falls keine passender ID gefunden wurde
-        /// </returns>
         public Guid GetImageCubeByFilename(string filename)
         {
             return manager.GetImageCubeByFilename(filename);
