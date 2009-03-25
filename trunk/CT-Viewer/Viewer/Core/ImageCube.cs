@@ -106,7 +106,6 @@ namespace Viewer.Core
         /// <param name="orientation">Gewuenschte Orientierung der Bilder</param>
         /// <param name="sliceIndex">Index der gewuenschten Schicht (0-basiert)</param>
         /// <returns>Bild als zweidimensionales Array</returns>
-        /// <exception cref="ImageCubeException">
         /// Bei der Übergabe eines fehlerhaften Wertes wird eine ImageCubeException
         /// ausgelöst.
         /// </exception>
